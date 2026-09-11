@@ -12,8 +12,11 @@ A small Express.js microservice that runs locally or inside a Docker container.
 
 ```text
 .
+├── .dockerignore
+├── .gitignore
 ├── app.js
 ├── Dockerfile
+├── README.md
 ├── package.json
 └── package-lock.json
 ```
@@ -40,7 +43,7 @@ http://localhost:3000
 
 ## Build the Docker Image
 
-Run this command from the project directory:
+Run this command from the repository root:
 
 ```bash
 docker build -t node-express-docker .
@@ -52,11 +55,19 @@ docker build -t node-express-docker .
 docker run -d --name node-express-docker -p 3000:3000 node-express-docker
 ```
 
+If port `3000` is already in use by a local Node.js process, map the container to port `3001` instead:
+
+```bash
+docker run -d --name node-express-docker -p 3001:3000 node-express-docker
+```
+
 Verify the service:
 
 ```bash
 curl http://localhost:3000/
 ```
+
+For the alternate port, use `http://localhost:3001/`.
 
 Expected response:
 
